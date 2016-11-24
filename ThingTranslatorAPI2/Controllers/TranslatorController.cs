@@ -83,11 +83,11 @@ namespace ThingTranslatorAPI2.Controllers
       translated = translations[0];
     }
 
-    //[Route("translate")]
-    //public IHttpActionResult GetTranslation() {
+    [Route("translate")]
+    public IHttpActionResult GetTranslation() {
 
-    //  return Ok();
-    //}
+      return Ok("translated");
+    }
 
     private StreamContent StreamConversion() {
       Stream reqStream = Request.Content.ReadAsStreamAsync().Result;
