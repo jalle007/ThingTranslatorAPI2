@@ -1,0 +1,36 @@
+﻿  /*
+        var labels = new List<object>();
+        foreach (var lbl in result[0].LabelAnnotations)
+        {
+          labels.Add(new { Label = lbl.Description, Score = lbl.Score });
+        }
+        var ret = Json(labels);
+        return ret;
+        */
+
+
+    /* not used
+    public async Task Translate(String srcText) {
+      var service = new TranslateService(new BaseClientService.Initializer() {
+        ApiKey = apiKey,
+        ApplicationName = "VisionAPI"
+      });
+
+      // Execute the first translation request.
+      TranslationsListResponse response;
+      try
+      {
+        response= await service.Translations.List(srcText, "bs").ExecuteAsync();
+      }
+      catch (Exception ex)
+      {
+        throw ex;
+      }
+      var translations = new List<string>();
+
+      foreach (TranslationsResource translation in response.Translations) {
+        translations.Add(translation.TranslatedText);
+        Console.WriteLine("translating " + srcText + ": " + translation.TranslatedText);
+      }
+      translated = translations[0];
+    }*/

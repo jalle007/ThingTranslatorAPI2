@@ -76,6 +76,10 @@
       <HintPath>..\packages\Google.Apis.Vision.v1.1.19.0.683\lib\net45\Google.Apis.Vision.v1.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="GoogleApi, Version=2.0.0.0, Culture=neutral, PublicKeyToken=1ab4932a36a8b2c2, processorArchitecture=MSIL">
+      <HintPath>..\packages\GoogleApi.2.0.13\lib\net45\GoogleApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
       <Private>True</Private>
@@ -123,6 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="t.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
