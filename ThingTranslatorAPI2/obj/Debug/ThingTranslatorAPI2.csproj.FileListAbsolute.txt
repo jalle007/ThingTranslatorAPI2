@@ -50,6 +50,6 @@ D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\bin\Zlib.Portable.xml
 D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\bin\System.Net.Http.Formatting.xml
 D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\bin\System.Web.Http.xml
 D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\bin\System.Web.Http.WebHost.xml
+D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\obj\Debug\ThingTranslatorAPI2.csprojResolveAssemblyReference.cache
 D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\obj\Debug\ThingTranslatorAPI2.dll
 D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\obj\Debug\ThingTranslatorAPI2.pdb
-D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\obj\Debug\ThingTranslatorAPI2.csprojResolveAssemblyReference.cache
