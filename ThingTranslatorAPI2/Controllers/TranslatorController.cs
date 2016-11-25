@@ -46,13 +46,15 @@ namespace ThingTranslatorAPI2.Controllers {
         var res = new List<object>();
 
       result = LabelDetectior.GetLabels(buffer);
-
+      res.Add(new { Result = result });
       try
       {
        bestGuess = result[0].LabelAnnotations.FirstOrDefault()?.Description;
+        res.Add(new { BestGuess = bestGuess });
         translated = TranslateText(bestGuess, "en", "hr");
-      }
-      catch (Exception ex)
+        res.Add(new { Translated = translated });
+
+      } catch (Exception ex)
       {
         res.Add(new { Translation = ex.Message.ToString() });
         return Json(res);
