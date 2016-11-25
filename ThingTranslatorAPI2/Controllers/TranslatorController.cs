@@ -42,11 +42,23 @@ namespace ThingTranslatorAPI2.Controllers {
       }
       var buffer = await file.ReadAsByteArrayAsync();
       //Do whatever you want with filename and its binaray data.
-      result = LabelDetectior.GetLabels(buffer);
-      String bestGuess = result[0].LabelAnnotations.FirstOrDefault()?.Description;
-       String translated = TranslateText(bestGuess, "en", "hr");
+      String bestGuess, translated;
+        var res = new List<object>();
 
-      var res = new List<object> { new { Translation = translated } };
+      try
+      {
+      result = LabelDetectior.GetLabels(buffer);
+       bestGuess = result[0].LabelAnnotations.FirstOrDefault()?.Description;
+        translated = TranslateText(bestGuess, "en", "hr");
+      }
+      catch (Exception ex)
+      {
+        res.Add(new { Translation = ex.Message.ToString() });
+        return Json(res);
+        throw;
+      }
+      res.Add(  new { Translation = translated } );
+       
       return Json(res);
     }
 
