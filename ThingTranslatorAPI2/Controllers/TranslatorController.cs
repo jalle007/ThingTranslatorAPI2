@@ -45,9 +45,10 @@ namespace ThingTranslatorAPI2.Controllers {
       String bestGuess, translated;
         var res = new List<object>();
 
+      result = LabelDetectior.GetLabels(buffer);
+
       try
       {
-      result = LabelDetectior.GetLabels(buffer);
        bestGuess = result[0].LabelAnnotations.FirstOrDefault()?.Description;
         translated = TranslateText(bestGuess, "en", "hr");
       }
