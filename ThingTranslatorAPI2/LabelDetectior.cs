@@ -45,9 +45,9 @@ namespace ThingTranslatorAPI2 {
     }
 
     public static IList<AnnotateImageResponse> GetLabels(byte[] imageArray) {
+     return null;
       VisionService vision = CreateAuthorizedClient();
 
-     return null;
     //  tmp.Responses.Add(new AnnotateImageResponse() {LabelAnnotations = new List<EntityAnnotation>() {} });
 
 

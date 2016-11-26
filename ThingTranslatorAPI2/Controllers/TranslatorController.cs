@@ -42,12 +42,13 @@ namespace ThingTranslatorAPI2.Controllers {
     
       var buffer = await file.ReadAsByteArrayAsync();
       //Do whatever you want with filename and its binaray data.
-
+     
    
       String bestGuess, translated;
        
       result = LabelDetectior.GetLabels(buffer);
-      res.Add(new { GetLabels = result });
+      
+      res.Add(new { GetLabels = result  });
       return Json(res);
 
 
