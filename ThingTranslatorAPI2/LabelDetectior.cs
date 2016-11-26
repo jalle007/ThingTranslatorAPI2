@@ -48,7 +48,8 @@ namespace ThingTranslatorAPI2 {
       }
       catch (Exception ex)
       {
-        Trace.TraceError(ex.Message);
+       
+        Trace.TraceError(ex.StackTrace);
       }
       return null;
 
@@ -75,7 +76,7 @@ namespace ThingTranslatorAPI2 {
       }
       catch (Exception ex)
       {
-        Trace.TraceError(ex.Message);
+        Trace.TraceError(ex.StackTrace);
       }
       return null;
 
