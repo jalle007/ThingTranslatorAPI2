@@ -4,6 +4,7 @@ using Google.Apis.Vision.v1;
 using Google.Apis.Vision.v1.Data;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Google.Apis.Discovery;
 
 namespace ThingTranslatorAPI2 {
@@ -26,45 +27,58 @@ namespace ThingTranslatorAPI2 {
     }
 
     public static IList<AnnotateImageResponse> GetLabels(  string imagePath) {
-      VisionService vision = CreateAuthorizedClient();
+      try
+      {
+        VisionService vision = CreateAuthorizedClient();
 
-      // Convert image to Base64 encoded for JSON ASCII text based request   
-      byte[] imageArray = System.IO.File.ReadAllBytes(imagePath);
-      string imageContent = Convert.ToBase64String(imageArray);
-      // Post label detection request to the Vision API
-      var responses = vision.Images.Annotate(
-          new BatchAnnotateImagesRequest() {
-            Requests = new[] {
+        // Convert image to Base64 encoded for JSON ASCII text based request   
+        byte[] imageArray = System.IO.File.ReadAllBytes(imagePath);
+        string imageContent = Convert.ToBase64String(imageArray);
+        // Post label detection request to the Vision API
+        var responses = vision.Images.Annotate(
+            new BatchAnnotateImagesRequest() {
+              Requests = new[] {
                     new AnnotateImageRequest() {
                         Features = new [] { new Feature() { Type = "LABEL_DETECTION"}},
                         Image = new Image() { Content = imageContent }
                     }
-         }
-          }).Execute();
-      return responses.Responses;
+           }
+            }).Execute();
+        return responses.Responses;
+      }
+      catch (Exception ex)
+      {
+        Trace.TraceError(ex.Message);
+      }
+      return null;
+
     }
 
     public static IList<AnnotateImageResponse> GetLabels(byte[] imageArray) {
-     return null;
-      VisionService vision = CreateAuthorizedClient();
+      try
+      {
+        VisionService vision = CreateAuthorizedClient();
 
-    //  tmp.Responses.Add(new AnnotateImageResponse() {LabelAnnotations = new List<EntityAnnotation>() {} });
-
-
-
-      // Convert image to Base64 encoded for JSON ASCII text based request   
-      string imageContent = Convert.ToBase64String(imageArray);
-      // Post label detection request to the Vision API
-      var responses = vision.Images.Annotate(
-          new BatchAnnotateImagesRequest() {
-            Requests = new[] {
+        // Convert image to Base64 encoded for JSON ASCII text based request   
+        string imageContent = Convert.ToBase64String(imageArray);
+        // Post label detection request to the Vision API
+        var responses = vision.Images.Annotate(
+            new BatchAnnotateImagesRequest() {
+              Requests = new[] {
                     new AnnotateImageRequest() {
                         Features = new [] { new Feature() { Type = "LABEL_DETECTION"}},
                         Image = new Image() { Content = imageContent }
                     }
-         }
-          }).Execute();
-      return responses.Responses;
+           }
+            }).Execute();
+        return responses.Responses;
+      }
+      catch (Exception ex)
+      {
+        Trace.TraceError(ex.Message);
+      }
+      return null;
+
     }
   }
 }
