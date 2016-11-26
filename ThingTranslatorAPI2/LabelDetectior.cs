@@ -47,6 +47,11 @@ namespace ThingTranslatorAPI2 {
     public static IList<AnnotateImageResponse> GetLabels(byte[] imageArray) {
       VisionService vision = CreateAuthorizedClient();
 
+     return null;
+    //  tmp.Responses.Add(new AnnotateImageResponse() {LabelAnnotations = new List<EntityAnnotation>() {} });
+
+
+
       // Convert image to Base64 encoded for JSON ASCII text based request   
       string imageContent = Convert.ToBase64String(imageArray);
       // Post label detection request to the Vision API
