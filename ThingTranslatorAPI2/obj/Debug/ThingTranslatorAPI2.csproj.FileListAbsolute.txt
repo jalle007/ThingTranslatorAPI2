@@ -1,3 +1,4 @@
+D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\bin\VisionAPI-0a3feb1f1da5.json
 D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\bin\roslyn\csc.exe
 D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
@@ -21,6 +22,7 @@ D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\bin\Google.Apis.dll
 D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\bin\Google.Apis.PlatformServices.dll
 D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\bin\Google.Apis.Translate.v2.dll
 D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\bin\Google.Apis.Vision.v1.dll
+D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\bin\GoogleApi.dll
 D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\bin\log4net.dll
 D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\bin\Newtonsoft.Json.dll
@@ -43,6 +45,8 @@ D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\bin\Google.Apis.Translate.v2
 D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\bin\Google.Apis.Translate.v2.xml
 D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\bin\Google.Apis.Vision.v1.pdb
 D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\bin\Google.Apis.Vision.v1.xml
+D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\bin\GoogleApi.pdb
+D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\bin\GoogleApi.xml
 D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\bin\log4net.xml
 D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\bin\Newtonsoft.Json.xml
@@ -53,6 +57,3 @@ D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\bin\System.Web.Http.WebHost.
 D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\obj\Debug\ThingTranslatorAPI2.csprojResolveAssemblyReference.cache
 D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\obj\Debug\ThingTranslatorAPI2.dll
 D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\obj\Debug\ThingTranslatorAPI2.pdb
-D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\bin\GoogleApi.dll
-D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\bin\GoogleApi.pdb
-D:\Projects\ThingTranslatorAPI2\ThingTranslatorAPI2\bin\GoogleApi.xml

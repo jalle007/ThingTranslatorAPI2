@@ -27,18 +27,7 @@ namespace ThingTranslatorAPI2.Controllers {
       }
     }
 
-    private static void createEnvVar() {
-      var path = System.Web.Hosting.HostingEnvironment.MapPath("~/") + "VisionAPI-0a3feb1f1da5.json";
-      var exist = System.IO.File.Exists(path);
-      if (exist) {
-        if (Environment.GetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS") == null) {
-          Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-          Trace.TraceError("createEnvVar: created " + path);
-        }
-      } else {
-        Trace.TraceError("createEnvVar: missing " + path);
-      }
-    }
+
 
     [Route("upload")]
     [HttpPost]
@@ -60,12 +49,9 @@ namespace ThingTranslatorAPI2.Controllers {
       var path = System.Web.Hosting.HostingEnvironment.MapPath( "~/" ) + "123.jpg";
       File.WriteAllBytes(path, buffer);
 
-
       result = LabelDetectior.GetLabels(path);
-      res.Add(new { GetLabels = result });
-      return Json(res);
 
-      res.Add(new { Result = result });
+      //res.Add(new { GetLabels = result });
       try
       {
        bestGuess = result[0].LabelAnnotations.FirstOrDefault()?.Description;
@@ -81,7 +67,6 @@ namespace ThingTranslatorAPI2.Controllers {
         return Json(res);
         throw;
       }
-      res.Add(  new { Translation = translated } );
        
       return Json(res);
     }
@@ -125,6 +110,19 @@ namespace ThingTranslatorAPI2.Controllers {
         streamContent.Headers.Add(header.Key, header.Value);
       }
       return streamContent;
+    }
+
+    private static void createEnvVar() {
+      var path = System.Web.Hosting.HostingEnvironment.MapPath("~/") + "VisionAPI-0a3feb1f1da5.json";
+      var exist = System.IO.File.Exists(path);
+      if (exist) {
+        if (Environment.GetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS") == null) {
+          Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
+          Trace.TraceError("createEnvVar: created " + path);
+        }
+      } else {
+        Trace.TraceError("createEnvVar: missing " + path);
+      }
     }
   }
 }
