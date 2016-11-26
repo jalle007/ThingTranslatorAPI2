@@ -27,12 +27,26 @@ namespace ThingTranslatorAPI2.Controllers {
       }
     }
 
+    private static void createEnvVar() {
+      var path = System.Web.Hosting.HostingEnvironment.MapPath("~/") + "VisionAPI-0a3feb1f1da5.json";
+      var exist = System.IO.File.Exists(path);
+      if (exist) {
+        if (Environment.GetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS") == null) {
+          Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
+          Trace.TraceError("createEnvVar: created " + path);
+        }
+      } else {
+        Trace.TraceError("createEnvVar: missing " + path);
+      }
+    }
+
     [Route("upload")]
     [HttpPost]
     public async Task<JsonResult<List<object>>> Upload() {
       if (!Request.Content.IsMimeMultipartContent())
         throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
 
+      createEnvVar();
       String bestGuess, translated;
       IList<AnnotateImageResponse> result;
       var provider = new MultipartMemoryStreamProvider();
