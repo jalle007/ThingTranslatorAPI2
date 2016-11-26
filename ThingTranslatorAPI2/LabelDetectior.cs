@@ -12,18 +12,23 @@ namespace ThingTranslatorAPI2 {
   public class LabelDetectior {
     /// <returns>an authorized Cloud Vision client.</returns>
     public static VisionService CreateAuthorizedClient() {
-      GoogleCredential credential =GoogleCredential.GetApplicationDefaultAsync().Result;
-      // Inject the Cloud Vision scopes
-      if (credential.IsCreateScopedRequired) {
-        credential = credential.CreateScoped(new[]
-        {
+      try {
+        GoogleCredential credential = GoogleCredential.GetApplicationDefaultAsync().Result;
+        // Inject the Cloud Vision scopes
+        if (credential.IsCreateScopedRequired) {
+          credential = credential.CreateScoped(new[]
+          {
                     VisionService.Scope.CloudPlatform
                 });
+        }
+        return new VisionService(new BaseClientService.Initializer {
+          HttpClientInitializer = credential,
+          GZipEnabled = false
+        });
+      } catch (Exception ex) {
+        Trace.TraceError("CreateAuthorizedClient: " + ex.StackTrace);
       }
-      return new VisionService(new BaseClientService.Initializer {
-        HttpClientInitializer = credential,
-        GZipEnabled = false
-      });
+      return null;
     }
 
     public static IList<AnnotateImageResponse> GetLabels(  string imagePath) {
