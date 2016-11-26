@@ -22,6 +22,7 @@ namespace ThingTranslatorAPI2.Controllers {
 
   public class Response
   {
+    public string Original { get; set; }
     public string Translation { get; set; }
     public string Error { get; set; }
   }
@@ -64,7 +65,7 @@ namespace ThingTranslatorAPI2.Controllers {
       try
       {
        bestGuess = result[0].LabelAnnotations.FirstOrDefault()?.Description;
-        //res.Add(new { BestGuess = bestGuess });
+        res.Original = bestGuess;
 
         translated = TranslateText(bestGuess, "en", "hr");
        res.Translation = translated ;
