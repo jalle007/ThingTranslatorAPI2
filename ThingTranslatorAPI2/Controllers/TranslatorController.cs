@@ -37,12 +37,19 @@ namespace ThingTranslatorAPI2.Controllers {
       var provider = new MultipartMemoryStreamProvider();
       await Request.Content.ReadAsMultipartAsync(provider);
 
+      var res = new List<object>();
       var file = provider.Contents[0];
     
       var buffer = await file.ReadAsByteArrayAsync();
       //Do whatever you want with filename and its binaray data.
+
+      
+
+        res.Add(new { File1 = buffer.Length});
+      return Json(res);
+
       String bestGuess, translated;
-        var res = new List<object>();
+       
 
       result = LabelDetectior.GetLabels(buffer);
       res.Add(new { Result = result });
