@@ -46,10 +46,10 @@ namespace ThingTranslatorAPI2.Controllers {
       var path = System.Web.Hosting.HostingEnvironment.MapPath( "~/" ) + "123.jpg";
       File.WriteAllBytes(path, buffer);
 
-      res.Add(new { GetLabels = path  });
-      return Json(res);
 
-      result = LabelDetectior.GetLabels(buffer);
+      result = LabelDetectior.GetLabels(path);
+      res.Add(new { GetLabels = result });
+      return Json(res);
 
       res.Add(new { Result = result });
       try
