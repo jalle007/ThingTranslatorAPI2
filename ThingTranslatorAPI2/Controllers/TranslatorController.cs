@@ -14,9 +14,19 @@ using Google.Apis.Translate.v2.Data;
 using Google.Apis.Vision.v1.Data;
 using GoogleApi;
 using GoogleApi.Entities.Translate.Translate.Request;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using TranslationsResource = Google.Apis.Translate.v2.Data.TranslationsResource;
 
 namespace ThingTranslatorAPI2.Controllers {
+
+  public class Response
+  {
+    public string Translation { get; set; }
+    public string Error { get; set; }
+  }
+
+
   [RoutePrefix("api")]
   public class TranslatorController : ApiController {
     String apiKey = "AIzaSyCUD75r6fNhZE5Xa8TNJaAeAXrSWzg-BiM";
@@ -27,11 +37,9 @@ namespace ThingTranslatorAPI2.Controllers {
       }
     }
 
-
-
     [Route("upload")]
     [HttpPost]
-    public async Task<JsonResult<List<object>>> Upload() {
+    public async Task<JsonResult<Response>> Upload() {
       if (!Request.Content.IsMimeMultipartContent())
         throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
 
@@ -41,7 +49,7 @@ namespace ThingTranslatorAPI2.Controllers {
       var provider = new MultipartMemoryStreamProvider();
       await Request.Content.ReadAsMultipartAsync(provider);
 
-      var res = new List<object>();
+      
       var file = provider.Contents[0];
     
       var buffer = await file.ReadAsByteArrayAsync();
@@ -52,23 +60,23 @@ namespace ThingTranslatorAPI2.Controllers {
       result = LabelDetectior.GetLabels(buffer);
 
       //res.Add(new { GetLabels = result });
+      var res = new Response();
       try
       {
        bestGuess = result[0].LabelAnnotations.FirstOrDefault()?.Description;
         //res.Add(new { BestGuess = bestGuess });
 
         translated = TranslateText(bestGuess, "en", "hr");
-        res.Add(new { Translated = translated });
+       res.Translation = translated ;
 
       } catch (Exception ex)
       {
         Trace.TraceError(ex.Message);
 
-        res.Add(new { Translation = ex.Message.ToString() });
+        res.Error   = ex.Message ;
         return Json(res);
-        throw;
       }
-       
+
       return Json(res);
     }
 
