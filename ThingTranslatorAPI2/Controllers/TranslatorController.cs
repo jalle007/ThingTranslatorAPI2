@@ -33,6 +33,7 @@ namespace ThingTranslatorAPI2.Controllers {
       if (!Request.Content.IsMimeMultipartContent())
         throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
 
+      String bestGuess, translated;
       IList<AnnotateImageResponse> result;
       var provider = new MultipartMemoryStreamProvider();
       await Request.Content.ReadAsMultipartAsync(provider);
@@ -42,15 +43,13 @@ namespace ThingTranslatorAPI2.Controllers {
     
       var buffer = await file.ReadAsByteArrayAsync();
       //Do whatever you want with filename and its binaray data.
-     
-   
-      String bestGuess, translated;
-       
-      result = LabelDetectior.GetLabels(buffer);
-      
-      res.Add(new { GetLabels = result  });
+      var path = System.Web.Hosting.HostingEnvironment.MapPath( "~/" ) + "123.jpg";
+      File.WriteAllBytes(path, buffer);
+
+      res.Add(new { GetLabels = path  });
       return Json(res);
 
+      result = LabelDetectior.GetLabels(buffer);
 
       res.Add(new { Result = result });
       try
