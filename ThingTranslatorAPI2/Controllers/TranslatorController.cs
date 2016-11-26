@@ -46,16 +46,17 @@ namespace ThingTranslatorAPI2.Controllers {
     
       var buffer = await file.ReadAsByteArrayAsync();
       //Do whatever you want with filename and its binaray data.
-      var path = System.Web.Hosting.HostingEnvironment.MapPath( "~/" ) + "123.jpg";
-      File.WriteAllBytes(path, buffer);
+      //var path = System.Web.Hosting.HostingEnvironment.MapPath( "~/" ) + "123.jpg";
+      //File.WriteAllBytes(path, buffer);
 
-      result = LabelDetectior.GetLabels(path);
+      result = LabelDetectior.GetLabels(buffer);
 
       //res.Add(new { GetLabels = result });
       try
       {
        bestGuess = result[0].LabelAnnotations.FirstOrDefault()?.Description;
-        res.Add(new { BestGuess = bestGuess });
+        //res.Add(new { BestGuess = bestGuess });
+
         translated = TranslateText(bestGuess, "en", "hr");
         res.Add(new { Translated = translated });
 
