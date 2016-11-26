@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -37,9 +38,7 @@ namespace ThingTranslatorAPI2.Controllers {
       await Request.Content.ReadAsMultipartAsync(provider);
 
       var file = provider.Contents[0];
-      if (file.Headers.ContentLength != 0) {
-        var filename = file.Headers.ContentDisposition.FileName.Trim('\"');
-      }
+    
       var buffer = await file.ReadAsByteArrayAsync();
       //Do whatever you want with filename and its binaray data.
       String bestGuess, translated;
@@ -56,6 +55,8 @@ namespace ThingTranslatorAPI2.Controllers {
 
       } catch (Exception ex)
       {
+        Trace.TraceError(ex.Message);
+
         res.Add(new { Translation = ex.Message.ToString() });
         return Json(res);
         throw;
@@ -77,8 +78,15 @@ namespace ThingTranslatorAPI2.Controllers {
         Qs = new[] { text },
         Key = apiKey
       };
+
+      try{
       var _result = GoogleTranslate.Translate.Query(_request);
       return _result.Data.Translations.First().TranslatedText;
+      }
+      catch (Exception ex)
+      {
+        return ex.Message;
+      }
     }
 
     private StreamContent StreamConversion() {
