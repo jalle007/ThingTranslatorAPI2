@@ -1,30 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Results;
-using Google.Apis.Services;
-using Google.Apis.Translate.v2;
-using Google.Apis.Translate.v2.Data;
 using Google.Apis.Vision.v1.Data;
 using GoogleApi;
 using GoogleApi.Entities.Translate.Translate.Request;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using TranslationsResource = Google.Apis.Translate.v2.Data.TranslationsResource;
 
 namespace ThingTranslatorAPI2.Controllers {
 
-  public class Response
-  {
+  public class Response {
     public string Original { get; set; }
     public string Translation { get; set; }
     public string Error { get; set; }
+
   }
 
 
@@ -45,38 +42,55 @@ namespace ThingTranslatorAPI2.Controllers {
         throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
 
       createEnvVar();
-      String bestGuess, translated;
+      String bestGuess, translated, langCode = string.Empty;
       IList<AnnotateImageResponse> result;
+      var res = new Response();
+      byte[] buffer = null;
+      IEnumerable<string> headerValues;
+      if (Request.Headers.TryGetValues("langCode", out headerValues)) {
+        langCode = headerValues.FirstOrDefault();
+
+      }
+       
+
       var provider = new MultipartMemoryStreamProvider();
       await Request.Content.ReadAsMultipartAsync(provider);
 
-      
-      var file = provider.Contents[0];
-    
-      var buffer = await file.ReadAsByteArrayAsync();
-      //Do whatever you want with filename and its binaray data.
-      //var path = System.Web.Hosting.HostingEnvironment.MapPath( "~/" ) + "123.jpg";
-      //File.WriteAllBytes(path, buffer);
+      // var file = provider.Contents[0];
+
+      foreach (var content in provider.Contents)
+      {
+        if (content.Headers.ContentLength>10)
+        {
+           buffer = await content.ReadAsByteArrayAsync();
+          //Do whatever you want with filename and its binaray data.
+          //var path = System.Web.Hosting.HostingEnvironment.MapPath( "~/" ) + "123.jpg";
+          //File.WriteAllBytes(path, buffer);
+        }
+        else
+        {
+          langCode = await content.ReadAsStringAsync();
+
+        }
+      }
 
       result = LabelDetectior.GetLabels(buffer);
+      
 
-      //res.Add(new { GetLabels = result });
-      var res = new Response();
-      try
-      {
-       bestGuess = result[0].LabelAnnotations.FirstOrDefault()?.Description;
+      try {
+        bestGuess = result[0].LabelAnnotations.FirstOrDefault()?.Description;
         res.Original = bestGuess;
 
-        translated = TranslateText(bestGuess, "en", "hr");
-       res.Translation = translated ;
+        translated = TranslateText(bestGuess, "en", langCode);
+        res.Translation = translated;
 
-      } catch (Exception ex)
-      {
+      } catch (Exception ex) {
         Trace.TraceError(ex.Message);
 
-        res.Error   = ex.Message ;
+        res.Error = ex.Message;
         return Json(res);
       }
+
 
       return Json(res);
     }
@@ -94,12 +108,10 @@ namespace ThingTranslatorAPI2.Controllers {
         Key = apiKey
       };
 
-      try{
-      var _result = GoogleTranslate.Translate.Query(_request);
-      return _result.Data.Translations.First().TranslatedText;
-      }
-      catch (Exception ex)
-      {
+      try {
+        var _result = GoogleTranslate.Translate.Query(_request);
+        return _result.Data.Translations.First().TranslatedText;
+      } catch (Exception ex) {
         return ex.Message;
       }
     }
