@@ -5,8 +5,6 @@ using Google.Apis.Vision.v1.Data;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using Google.Apis.Discovery;
 
 namespace ThingTranslatorAPI2 {
 
