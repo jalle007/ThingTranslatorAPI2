@@ -1,4 +1,24 @@
-﻿  /*
+﻿
+    private StreamContent StreamConversion() {
+      Stream reqStream = Request.Content.ReadAsStreamAsync().Result;
+      var tempStream = new MemoryStream();
+      reqStream.CopyTo(tempStream);
+
+      tempStream.Seek(0, SeekOrigin.End);
+      var writer = new StreamWriter(tempStream);
+      writer.WriteLine();
+      writer.Flush();
+      tempStream.Position = 0;
+
+      var streamContent = new StreamContent(tempStream);
+      foreach (var header in Request.Content.Headers) {
+        streamContent.Headers.Add(header.Key, header.Value);
+      }
+      return streamContent;
+    }
+
+
+  /*
         var labels = new List<object>();
         foreach (var lbl in result[0].LabelAnnotations)
         {

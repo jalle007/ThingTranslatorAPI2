@@ -26,14 +26,15 @@ namespace ThingTranslatorAPI2.Controllers {
 
 
   [RoutePrefix("api")]
-  public class TranslatorController : ApiController {
-    String apiKey = "AIzaSyCUD75r6fNhZE5Xa8TNJaAeAXrSWzg-BiM";
+  public class TranslatorController : ApiController
+  {
+    String apiKey = getEnvVar(); // "AIzaSyCUD75r6fNhZE5Xa8TNJaAeAXrSWzg-BiM";
 
-    public class MyMultipartFormDataStreamProvider : MultipartFormDataStreamProvider {
-      public MyMultipartFormDataStreamProvider(string path)
-          : base(path) {
-      }
-    }
+    //public class MyMultipartFormDataStreamProvider : MultipartFormDataStreamProvider {
+    //  public MyMultipartFormDataStreamProvider(string path)
+    //      : base(path) {
+    //  }
+    //}
 
     [Route("upload")]
     [HttpPost]
@@ -46,11 +47,7 @@ namespace ThingTranslatorAPI2.Controllers {
       IList<AnnotateImageResponse> result;
       var res = new Response();
       byte[] buffer = null;
-      IEnumerable<string> headerValues;
-      if (Request.Headers.TryGetValues("langCode", out headerValues)) {
-        langCode = headerValues.FirstOrDefault();
-
-      }
+     
        
 
       var provider = new MultipartMemoryStreamProvider();
@@ -95,11 +92,13 @@ namespace ThingTranslatorAPI2.Controllers {
       return Json(res);
     }
 
+    //dummy method
     [Route("translate")]
     public IHttpActionResult GetTranslation() {
-      return Ok(TranslateText("Hello", "en", "hr"));
+      return Ok(TranslateText("Hello", "en", "bs"));
     }
 
+    //Translate text from source to target language
     private String TranslateText(String text, String source, String target) {
       var _request = new TranslateRequest {
         Source = source,
@@ -116,25 +115,14 @@ namespace ThingTranslatorAPI2.Controllers {
       }
     }
 
-    private StreamContent StreamConversion() {
-      Stream reqStream = Request.Content.ReadAsStreamAsync().Result;
-      var tempStream = new MemoryStream();
-      reqStream.CopyTo(tempStream);
-
-      tempStream.Seek(0, SeekOrigin.End);
-      var writer = new StreamWriter(tempStream);
-      writer.WriteLine();
-      writer.Flush();
-      tempStream.Position = 0;
-
-      var streamContent = new StreamContent(tempStream);
-      foreach (var header in Request.Content.Headers) {
-        streamContent.Headers.Add(header.Key, header.Value);
-      }
-      return streamContent;
+    private static String getEnvVar() {
+      return (Environment.GetEnvironmentVariable("apiKey"));  
     }
 
     private static void createEnvVar() {
+      /*Use your own VisionAPI key here
+       * To create new key go to : https://cloud.google.com/vision/docs/quickstart
+       */
       var path = System.Web.Hosting.HostingEnvironment.MapPath("~/") + "VisionAPI-0a3feb1f1da5.json";
       var exist = System.IO.File.Exists(path);
       if (exist) {

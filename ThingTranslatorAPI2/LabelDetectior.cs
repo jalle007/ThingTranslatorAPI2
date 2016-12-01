@@ -12,12 +12,9 @@ namespace ThingTranslatorAPI2 {
 
   public class LabelDetectior {
     
-
-    /// <returns>an authorized Cloud Vision client.</returns>
+    // returns an authorized Cloud Vision client. 
     public static VisionService CreateAuthorizedClient()
     {
-
-  
       try {
         GoogleCredential credential = GoogleCredential.GetApplicationDefaultAsync().Result;
         // Inject the Cloud Vision scopes
@@ -37,36 +34,7 @@ namespace ThingTranslatorAPI2 {
       return null;
     }
 
-
-    public static IList<AnnotateImageResponse> GetLabels(  string imagePath) {
-      try
-      {
-        VisionService vision = CreateAuthorizedClient();
-
-        // Convert image to Base64 encoded for JSON ASCII text based request   
-        byte[] imageArray = System.IO.File.ReadAllBytes(imagePath);
-        string imageContent = Convert.ToBase64String(imageArray);
-        // Post label detection request to the Vision API
-        var responses = vision.Images.Annotate(
-            new BatchAnnotateImagesRequest() {
-              Requests = new[] {
-                    new AnnotateImageRequest() {
-                        Features = new [] { new Feature() { Type = "LABEL_DETECTION"}},
-                        Image = new Image() { Content = imageContent }
-                    }
-           }
-            }).Execute();
-        return responses.Responses;
-      }
-      catch (Exception ex)
-      {
-       
-        Trace.TraceError(ex.StackTrace);
-      }
-      return null;
-
-    }
-
+    // Get labels from image in memory
     public static IList<AnnotateImageResponse> GetLabels(byte[] imageArray) {
       try
       {
