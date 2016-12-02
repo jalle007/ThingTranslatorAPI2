@@ -15,7 +15,7 @@ namespace ThingTranslatorAPI2 {
 
     protected void Application_Start() {
 
-      apiKey = "AIzaSyCUD75r6fNhZE5Xa8TNJaAeAXrSWzg-BiM"; //(Environment.GetEnvironmentVariable("apiKey"));
+      apiKey = (Environment.GetEnvironmentVariable("apiKey"));
       Trace.TraceError("apiKey: " + apiKey);
 
 
