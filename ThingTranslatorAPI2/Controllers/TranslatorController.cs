@@ -20,7 +20,7 @@ namespace ThingTranslatorAPI2.Controllers {
   {
 
     
-     // "AIzaSyCUD75r6fNhZE5Xa8TNJaAeAXrSWzg-BiM";
+   
 
     //public class MyMultipartFormDataStreamProvider : MultipartFormDataStreamProvider {
     //  public MyMultipartFormDataStreamProvider(string path)
@@ -92,7 +92,6 @@ namespace ThingTranslatorAPI2.Controllers {
 
     //Translate text from source to target language
     private String TranslateText(String text, String source, String target) {
-      return getApiKey();
 
       var _request = new TranslateRequest {
         Source = source,
@@ -110,7 +109,8 @@ namespace ThingTranslatorAPI2.Controllers {
     }
 
     private static String getApiKey() {
-      return (Environment.GetEnvironmentVariable("apiKey"));  
+      return   "AIzaSyCUD75r6fNhZE5Xa8TNJaAeAXrSWzg-BiM";
+     // return (Environment.GetEnvironmentVariable("apiKey"));  
     }
   }
 }
