@@ -30,8 +30,19 @@ namespace ThingTranslatorAPI2 {
     private static void createEnvVar() {
       var GAC = Environment.GetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS");
       Trace.TraceError("GAC: " + GAC);
-      
-       if (GAC == null) {
+
+      if (Environment.GetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS") == null) {
+        var path = System.Web.Hosting.HostingEnvironment.MapPath("~/") + "VisionAPI-0a3feb1f1da5.json";
+        Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
+        Trace.TraceError("createEnvVar: created " + path);
+      }
+     else {
+           
+        }
+
+      return;
+
+        if (GAC == null) {
         var VisionApiKey = Environment.GetEnvironmentVariable("VisionApiKey");
         if (VisionApiKey != null) {
           var path = System.Web.Hosting.HostingEnvironment.MapPath("~/") + "VisionAPI-0a3feb1f1da5.json";

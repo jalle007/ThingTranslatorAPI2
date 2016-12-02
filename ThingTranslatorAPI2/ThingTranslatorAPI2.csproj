@@ -132,6 +132,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Response.cs" />
     <Compile Include="Controllers\TranslatorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -143,6 +144,9 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="bower.json" />
+    <Content Include="VisionAPI-0a3feb1f1da5.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

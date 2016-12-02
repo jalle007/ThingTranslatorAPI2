@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
 using System.Web.Http.Results;
 using Google.Apis.Vision.v1.Data;
@@ -16,15 +13,7 @@ using GoogleApi.Entities.Translate.Translate.Request;
 using TranslationsResource = Google.Apis.Translate.v2.Data.TranslationsResource;
 
 namespace ThingTranslatorAPI2.Controllers {
-
-  public class Response {
-    public string Original { get; set; }
-    public string Translation { get; set; }
-    public string Error { get; set; }
-
-  }
-
-
+   
   [RoutePrefix("api")]
   public class TranslatorController : ApiController
   {
@@ -43,8 +32,8 @@ namespace ThingTranslatorAPI2.Controllers {
         throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
 
       String bestGuess, translated, langCode = string.Empty;
-      IList<AnnotateImageResponse> result;
-      var res = new Response();
+      IList<AnnotateImageResponse> labels;
+      var response = new Response();
       byte[] buffer = null;
      
        
@@ -70,25 +59,26 @@ namespace ThingTranslatorAPI2.Controllers {
         }
       }
 
-      result = LabelDetectior.GetLabels(buffer);
+      labels = LabelDetectior.GetLabels(buffer);
       
-
       try {
-        bestGuess = result[0].LabelAnnotations.FirstOrDefault()?.Description;
-        res.Original = bestGuess;
+        //Take the first result that has the highest score
+        bestGuess = labels[0].LabelAnnotations.FirstOrDefault()?.Description;
 
+        //translate text
         translated = TranslateText(bestGuess, "en", langCode);
-        res.Translation = translated;
+
+        response.Original = bestGuess;
+        response.Translation = translated;
 
       } catch (Exception ex) {
         Trace.TraceError(ex.Message);
 
-        res.Error = ex.Message;
-        return Json(res);
+        response.Error = ex.Message;
+        return Json(response);
       }
 
-
-      return Json(res);
+      return Json(response);
     }
 
     //dummy method
@@ -117,7 +107,5 @@ namespace ThingTranslatorAPI2.Controllers {
     private static String getApiKey() {
       return (Environment.GetEnvironmentVariable("apiKey"));  
     }
-
-
   }
 }
