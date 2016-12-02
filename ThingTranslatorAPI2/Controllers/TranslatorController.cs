@@ -18,6 +18,8 @@ namespace ThingTranslatorAPI2.Controllers {
   [RoutePrefix("api")]
   public class TranslatorController : ApiController
   {
+
+    String  apiKey2 = Environment.GetEnvironmentVariable("apiKey");
      // "AIzaSyCUD75r6fNhZE5Xa8TNJaAeAXrSWzg-BiM";
 
     //public class MyMultipartFormDataStreamProvider : MultipartFormDataStreamProvider {
@@ -94,7 +96,7 @@ namespace ThingTranslatorAPI2.Controllers {
       //  var _apiKey = Global.apiKey;
 
 
-      return "_apiKey: " + _apiKey;
+      return "_apiKey: " +  apiKey2;
 
       var _request = new TranslateRequest {
         Source = source,
