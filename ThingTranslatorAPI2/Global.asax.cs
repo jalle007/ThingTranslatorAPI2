@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Web;
 using System.Web.Http;
-using System.Web.Routing;
 
 namespace ThingTranslatorAPI2 {
   public class Global : System.Web.HttpApplication {
@@ -14,14 +10,13 @@ namespace ThingTranslatorAPI2 {
 
 
     protected void Application_Start() {
-
+      GlobalConfiguration.Configure(WebApiConfig.Register);
       apiKey = (Environment.GetEnvironmentVariable("apiKey"));
-      Trace.TraceError("apiKey: " + apiKey);
-
-
+      Application["apiKey"] = apiKey;
 
       createEnvVar();
-      GlobalConfiguration.Configure(WebApiConfig.Register);
+
+      Trace.TraceError("apiKey: " + apiKey);
     }
 
     /*Use your own VisionAPI key here
@@ -63,14 +58,6 @@ namespace ThingTranslatorAPI2 {
         }
       }
 
-      //if (exist) {
-      //  if (Environment.GetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS") == null) {
-      //    Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-      //    Trace.TraceError("createEnvVar: created " + path);
-      //  }
-      //} else {
-      //  Trace.TraceError("createEnvVar: missing " + path);
-      //}
     }
   }
 }

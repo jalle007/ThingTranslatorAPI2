@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Results;
 using Google.Apis.Vision.v1.Data;
@@ -93,7 +94,7 @@ namespace ThingTranslatorAPI2.Controllers {
         Source = source,
         Target = target,
         Qs = new[] { text },
-        Key =Global.apiKey
+        Key =  (string) HttpContext.Current.Application["apiKey"]  
       };
 
       try {
