@@ -13,6 +13,8 @@ namespace ThingTranslatorAPI2 {
     // returns an authorized Cloud Vision client. 
     public static VisionService CreateAuthorizedClient()
     {
+      Trace.TraceError("GOOGLE_APPLICATION_CREDENTIALS: " + Environment.GetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS"));
+
       try {
         GoogleCredential credential = GoogleCredential.GetApplicationDefaultAsync().Result;
         // Inject the Cloud Vision scopes
