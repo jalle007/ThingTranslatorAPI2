@@ -19,7 +19,7 @@ namespace ThingTranslatorAPI2.Controllers {
   public class TranslatorController : ApiController
   {
 
-    String  apiKey2 = Environment.GetEnvironmentVariable("apiKey");
+    
      // "AIzaSyCUD75r6fNhZE5Xa8TNJaAeAXrSWzg-BiM";
 
     //public class MyMultipartFormDataStreamProvider : MultipartFormDataStreamProvider {
@@ -92,17 +92,13 @@ namespace ThingTranslatorAPI2.Controllers {
 
     //Translate text from source to target language
     private String TranslateText(String text, String source, String target) {
-     var _apiKey = (string) HttpContext.Current.Application["apiKey"];
-      //  var _apiKey = Global.apiKey;
-
-
-      return "_apiKey: " +  apiKey2;
+    
 
       var _request = new TranslateRequest {
         Source = source,
         Target = target,
         Qs = new[] { text },
-        Key = _apiKey
+        Key = getApiKey()
       };
 
       try {
