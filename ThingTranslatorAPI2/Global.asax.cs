@@ -11,7 +11,7 @@ namespace ThingTranslatorAPI2 {
 
     protected void Application_Start() {
       GlobalConfiguration.Configure(WebApiConfig.Register);
-      apiKey = (Environment.GetEnvironmentVariable("apiKey"));
+      apiKey =  (Environment.GetEnvironmentVariable("apiKey"));
       Application["apiKey"] = apiKey;
 
       createEnvVar();

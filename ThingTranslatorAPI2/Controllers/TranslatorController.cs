@@ -90,11 +90,12 @@ namespace ThingTranslatorAPI2.Controllers {
 
     //Translate text from source to target language
     private String TranslateText(String text, String source, String target) {
+      var _apiKey = (string) HttpContext.Current.Application["apiKey"];
       var _request = new TranslateRequest {
         Source = source,
         Target = target,
         Qs = new[] { text },
-        Key =  (string) HttpContext.Current.Application["apiKey"]  
+        Key = _apiKey
       };
 
       try {
