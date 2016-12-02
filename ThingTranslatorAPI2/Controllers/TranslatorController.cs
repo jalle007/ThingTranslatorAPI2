@@ -92,7 +92,7 @@ namespace ThingTranslatorAPI2.Controllers {
 
     //Translate text from source to target language
     private String TranslateText(String text, String source, String target) {
-    
+      return getApiKey();
 
       var _request = new TranslateRequest {
         Source = source,
