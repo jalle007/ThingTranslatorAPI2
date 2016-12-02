@@ -19,7 +19,7 @@ namespace ThingTranslatorAPI2 {
    */
     private static void createEnvVar() {
       var GAC = Environment.GetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS");
-
+      Trace.TraceError("GAC: " + GAC);
       /*  If GAC is not alreadz stored at zour szstem we create it on the file
        *  First we get value od VisionaPIKez which is actuallz JSON filoe stored as EnvVariable
        *  Then we save that string to file
