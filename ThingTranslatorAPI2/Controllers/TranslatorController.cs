@@ -17,7 +17,7 @@ namespace ThingTranslatorAPI2.Controllers {
   [RoutePrefix("api")]
   public class TranslatorController : ApiController
   {
-    String apiKey = getApiKey(); // "AIzaSyCUD75r6fNhZE5Xa8TNJaAeAXrSWzg-BiM";
+     // "AIzaSyCUD75r6fNhZE5Xa8TNJaAeAXrSWzg-BiM";
 
     //public class MyMultipartFormDataStreamProvider : MultipartFormDataStreamProvider {
     //  public MyMultipartFormDataStreamProvider(string path)
@@ -93,7 +93,7 @@ namespace ThingTranslatorAPI2.Controllers {
         Source = source,
         Target = target,
         Qs = new[] { text },
-        Key = apiKey
+        Key =WebApiApplication.apiKey
       };
 
       try {

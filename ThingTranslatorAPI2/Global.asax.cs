@@ -9,8 +9,18 @@ using System.Web.Routing;
 
 namespace ThingTranslatorAPI2 {
   public class WebApiApplication : System.Web.HttpApplication {
+
+    public static String apiKey;
+
+
     protected void Application_Start() {
       Trace.TraceError("Application_Start: " + "Application_Start");
+
+      apiKey = (Environment.GetEnvironmentVariable("apiKey"));
+      Trace.TraceError("apiKey: " + apiKey);
+
+
+
       createEnvVar();
       GlobalConfiguration.Configure(WebApiConfig.Register);
     }
