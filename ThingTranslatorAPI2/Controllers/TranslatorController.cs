@@ -93,7 +93,7 @@ namespace ThingTranslatorAPI2.Controllers {
         Source = source,
         Target = target,
         Qs = new[] { text },
-        Key =WebApiApplication.apiKey
+        Key =Global.apiKey
       };
 
       try {
