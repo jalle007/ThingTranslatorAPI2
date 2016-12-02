@@ -10,23 +10,27 @@ using System.Web.Routing;
 namespace ThingTranslatorAPI2 {
   public class WebApiApplication : System.Web.HttpApplication {
     protected void Application_Start() {
-      GlobalConfiguration.Configure(WebApiConfig.Register);
+      Trace.TraceError("Application_Start: " + "Application_Start");
       createEnvVar();
+      GlobalConfiguration.Configure(WebApiConfig.Register);
     }
 
     /*Use your own VisionAPI key here
    * To create new key go to : https://cloud.google.com/vision/docs/quickstart
    */
+
+    /*  If GAC is not alreadz stored at zour szstem we create it on the file
+     *  First we get value od VisionaPIKez which is actuallz JSON filoe stored as EnvVariable
+     *  Then we save that string to file
+     *  Then set GOOGLE_APPLICATION_CREDENTIALS to point to that file
+     *  in the end we should have this Enviromental variable stored at your host
+     *  GOOGLE_APPLICATION_CREDENTIALS=\part\to\your\visionapiikey.json
+     */
+
     private static void createEnvVar() {
       var GAC = Environment.GetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS");
       Trace.TraceError("GAC: " + GAC);
-      /*  If GAC is not alreadz stored at zour szstem we create it on the file
-       *  First we get value od VisionaPIKez which is actuallz JSON filoe stored as EnvVariable
-       *  Then we save that string to file
-       *  Then set GOOGLE_APPLICATION_CREDENTIALS to point to that file
-       *  in the end we should have this Enviromental variable stored at your host
-       *  GOOGLE_APPLICATION_CREDENTIALS=\part\to\your\visionapiikey.json
-       */
+      
       if (GAC == null) {
         var VisionApiKey = Environment.GetEnvironmentVariable("VisionApiKey");
         if (VisionApiKey != null) {
