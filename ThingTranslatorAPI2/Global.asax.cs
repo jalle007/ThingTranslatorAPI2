@@ -55,7 +55,7 @@ namespace ThingTranslatorAPI2 {
 
           Trace.TraceError("path: " + path);
 
-          File.WriteAllText(VisionApiKey, path);
+          File.WriteAllText(path,VisionApiKey );
           Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
         }
       }
