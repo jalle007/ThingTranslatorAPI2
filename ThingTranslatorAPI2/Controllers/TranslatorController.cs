@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
@@ -109,7 +110,10 @@ namespace ThingTranslatorAPI2.Controllers {
     }
 
     private static String getApiKey() {
-      return   "AIzaSyCUD75r6fNhZE5Xa8TNJaAeAXrSWzg-BiM";
+      var apiKey = ConfigurationManager.AppSettings["apiKey"];
+      return apiKey;
+
+      //return   "AIzaSyCUD75r6fNhZE5Xa8TNJaAeAXrSWzg-BiM";
      // return (Environment.GetEnvironmentVariable("apiKey"));  
     }
   }
