@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Web.Http;
@@ -11,9 +12,10 @@ namespace ThingTranslatorAPI2 {
 
     protected void Application_Start() {
       GlobalConfiguration.Configure(WebApiConfig.Register);
-      //apiKey = Environment.GetEnvironmentVariable("apiKey");
-      //Application["apiKey"] = apiKey;
-      //Trace.TraceError("apiKey: " + apiKey);
+        apiKey = ConfigurationManager.AppSettings["apiKey"];
+     
+      Application["apiKey"] = apiKey;
+      Trace.TraceError("apiKey: " + apiKey);
 
       createEnvVar();
 
@@ -35,19 +37,19 @@ namespace ThingTranslatorAPI2 {
       var GAC = Environment.GetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS");
       Trace.TraceError("GAC: " + GAC);
 
-      if (Environment.GetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS") == null) {
-        var path = System.Web.Hosting.HostingEnvironment.MapPath("~/") + "VisionAPI-0a3feb1f1da5.json";
-        Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-        Trace.TraceError("createEnvVar: created " + path);
-      }
-     else {
+     // if (Environment.GetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS") == null) {
+     //   var path = System.Web.Hosting.HostingEnvironment.MapPath("~/") + "VisionAPI-0a3feb1f1da5.json";
+     //   Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
+     //   Trace.TraceError("createEnvVar: created " + path);
+     // }
+     //else {
            
-        }
+     //   }
 
-      return;
+     // return;
 
         if (GAC == null) {
-        var VisionApiKey = Environment.GetEnvironmentVariable("VisionApiKey");
+        var VisionApiKey = ConfigurationManager.AppSettings["VisionApiKey"]; //Environment.GetEnvironmentVariable("VisionApiKey");
         if (VisionApiKey != null) {
           var path = System.Web.Hosting.HostingEnvironment.MapPath("~/") + "VisionAPI-0a3feb1f1da5.json";
 

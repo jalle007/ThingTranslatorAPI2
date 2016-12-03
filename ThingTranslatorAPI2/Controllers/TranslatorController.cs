@@ -98,7 +98,7 @@ namespace ThingTranslatorAPI2.Controllers {
         Source = source,
         Target = target,
         Qs = new[] { text },
-        Key = getApiKey()
+        Key = Global.apiKey
       };
 
       try {
